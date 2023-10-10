@@ -1,9 +1,17 @@
+import '@fontsource/roboto/300.css'
+import '@fontsource/roboto/400.css'
+import '@fontsource/roboto/500.css'
+import '@fontsource/roboto/700.css'
+
 import { useAccount } from 'wagmi'
 
 import { Account } from './components/Account'
 import { Balance } from './components/Balance'
 import { BlockNumber } from './components/BlockNumber'
 import { Connect } from './components/Connect'
+import { ConnectDialog } from './components/ConnectDialog'
+import ResponsiveAppBar from './components/AppBar'
+import BasicGrid from './components/LandingPage'
 import { NetworkSwitcher } from './components/NetworkSwitcher'
 import { ReadContract } from './components/ReadContract'
 import { ReadContracts } from './components/ReadContracts'
@@ -23,11 +31,13 @@ export function App() {
 
   return (
     <>
-      <h1>wagmi + Vite</h1>
+      {/* <h1>wagmi + Vite</h1> */}
 
-      <Connect />
+      {/* <Connect /> */}
 
-      {isConnected && (
+      <ResponsiveAppBar />
+      <BasicGrid />
+      {/* {isConnected && (
         <>
           <hr />
           <h2>Network</h2>
@@ -93,7 +103,7 @@ export function App() {
           <h2>Write Contract (Prepared)</h2>
           <WriteContractPrepared />
         </>
-      )}
+      )} */}
     </>
   )
 }
