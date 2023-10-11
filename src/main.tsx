@@ -10,13 +10,20 @@ import { WagmiConfig } from 'wagmi'
 
 import { App } from './App'
 import { config } from './wagmi'
+import SignUp from './components/pages/CreateProvider'
+import BasicGrid from './components/pages/LandingPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
     <Route 
       path='/'
-      element={<App />}>
-
+      element={<App />}
+      >
+        <Route index element={<BasicGrid />} />
+        <Route
+          path='signup'
+          element={<SignUp />}
+          />
     </Route>
   ));
 

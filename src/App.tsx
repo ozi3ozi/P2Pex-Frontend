@@ -5,13 +5,14 @@ import '@fontsource/roboto/700.css'
 
 import { useAccount } from 'wagmi'
 
+import { Outlet, Link } from "react-router-dom";
 import { Account } from './components/Account'
 import { Balance } from './components/Balance'
 import { BlockNumber } from './components/BlockNumber'
 import { Connect } from './components/Connect'
 import { ConnectDialog } from './components/ConnectDialog'
-import ResponsiveAppBar from './components/AppBar'
-import BasicGrid from './components/LandingPage'
+import ResponsiveAppBar from './components/pages/AppBar'
+import BasicGrid from './components/pages/LandingPage'
 import { NetworkSwitcher } from './components/NetworkSwitcher'
 import { ReadContract } from './components/ReadContract'
 import { ReadContracts } from './components/ReadContracts'
@@ -25,9 +26,16 @@ import { WatchContractEvents } from './components/WatchContractEvents'
 import { WatchPendingTransactions } from './components/WatchPendingTransactions'
 import { WriteContract } from './components/WriteContract'
 import { WriteContractPrepared } from './components/WriteContractPrepared'
+import BgImage from "./Images/pexels-adrien-olichon-2387793.jpg";
+
+import { Box, Paper } from '@mui/material';
+import CssBaseline from '@mui/material/CssBaseline';
+import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
 export function App() {
   const { isConnected } = useAccount()
+
+  const darkTheme = createTheme({ palette: { mode: 'dark' } });
 
   return (
     <>
@@ -35,8 +43,16 @@ export function App() {
 
       {/* <Connect /> */}
 
-      <ResponsiveAppBar />
-      <BasicGrid />
+      <ThemeProvider theme={darkTheme}>
+        <CssBaseline />
+        <Paper sx={{
+          backgroundImage: `url(${BgImage})`, backgroundSize: "cover",
+          backgroundRepeat: 'no-repeat', height: 'inherit', width: 'inherit',
+        }}>
+          <ResponsiveAppBar />
+          <Outlet />
+        </Paper>
+      </ThemeProvider>
       {/* {isConnected && (
         <>
           <hr />
@@ -104,6 +120,7 @@ export function App() {
           <WriteContractPrepared />
         </>
       )} */}
+
     </>
   )
 }
