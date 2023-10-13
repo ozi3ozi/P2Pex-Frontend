@@ -4,7 +4,7 @@ import '@fontsource/roboto/500.css'
 import '@fontsource/roboto/700.css'
 
 import { useAccount } from 'wagmi'
-
+import * as React from 'react';
 import { Outlet, Link } from "react-router-dom";
 import { Account } from './components/Account'
 import { Balance } from './components/Balance'
@@ -26,33 +26,109 @@ import { WatchContractEvents } from './components/WatchContractEvents'
 import { WatchPendingTransactions } from './components/WatchPendingTransactions'
 import { WriteContract } from './components/WriteContract'
 import { WriteContractPrepared } from './components/WriteContractPrepared'
-import BgImage from "./Images/pexels-adrien-olichon-2387793.jpg";
 
-import { Box, Paper } from '@mui/material';
+import { Box, Paper, PaletteMode } from '@mui/material';
 import CssBaseline from '@mui/material/CssBaseline';
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
+import useMediaQuery from '@mui/material/useMediaQuery';
+
+import { useCallback } from "react";
+import Particles from "react-tsparticles";
+import { loadFull } from "tsparticles";
+import type { Engine, ISourceOptions } from "tsparticles-engine";
+import particlesOptions from "./particles.json";
+
+
+const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
+
+export function useColorModeContext() {
+  return React.useContext(ColorModeContext);
+}
 
 export function App() {
   const { isConnected } = useAccount()
+  const preferredMode = useMediaQuery('(prefers-color-scheme: dark)') ? 'dark' : 'light';
 
-  const darkTheme = createTheme({ palette: { mode: 'dark' } });
+  const particlesInit = useCallback(async (engine: Engine) => {
+      await loadFull(engine);
+  }, []);
+
+  const getDesignTokens = (mode: PaletteMode) => ({
+    palette: {
+      mode,
+      ...(mode === 'light'
+        ? {
+            // palette values for light mode
+            primary: {
+              main: '#1b0c0d',
+            },
+            secondary: {
+              main: '#f50057',
+            },
+            background: {
+              default: '#dcd2ca',
+              paper: '#f2ede9',
+            },
+          }
+        : {
+            // palette values for dark mode
+            primary: {
+              main: '#FFE0B2',
+            },
+            secondary: {
+              main: '#f50057',
+            },
+            background: {
+              default: '#1b0c0d',
+              paper: '#1b0c0d',
+            },
+          }),
+    },
+  });
+
+  const [mode, setMode] = React.useState<PaletteMode>(preferredMode);
+  const colorMode = React.useMemo(
+    () => ({
+      // The dark mode switch would invoke this method
+      toggleColorMode: () => {
+        setMode((prevMode: PaletteMode) =>
+          prevMode === 'light' ? 'dark' : 'light',
+        );
+      },
+    }),
+    [],
+  );
+
+  // Update the theme only if the mode changes
+  const theme = React.useMemo(() => createTheme(getDesignTokens(mode)), [mode]);
+  const activeParticlesOptions = React.useMemo(() => mode == 'light' ? particlesOptions : { ...particlesOptions, 
+    background: {
+      "color": "#1b0c0d"
+    },
+    particles: {
+      ...particlesOptions.particles,
+      color: {
+        "value": "#d8ebe9"
+      },
+      line_linked: {
+        ...particlesOptions.particles.line_linked,
+        "color": "#d8ebe9"
+      },
+    }
+  }, [mode],);
 
   return (
     <>
       {/* <h1>wagmi + Vite</h1> */}
 
       {/* <Connect /> */}
-
-      <ThemeProvider theme={darkTheme}>
-        <CssBaseline />
-        <Paper sx={{
-          backgroundImage: `url(${BgImage})`, backgroundSize: "cover",
-          backgroundRepeat: 'no-repeat', height: 'inherit', width: 'inherit',
-        }}>
-          <ResponsiveAppBar />
-          <Outlet />
-        </Paper>
-      </ThemeProvider>
+      <ColorModeContext.Provider value={colorMode}>
+        <ThemeProvider theme={theme}>
+          <Particles options={activeParticlesOptions as ISourceOptions} init={particlesInit}/>
+            <ResponsiveAppBar />
+            <Outlet />
+        </ThemeProvider>
+      </ColorModeContext.Provider>
       {/* {isConnected && (
         <>
           <hr />

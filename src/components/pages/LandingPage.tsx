@@ -12,6 +12,8 @@ import { Button, CardActionArea, CardActions, Link as LinkMui } from '@mui/mater
 
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
+import BgImage from "../../Images/pexels-adrien-olichon-2387793.jpg";
+
 // const Item = styled(Paper)(({ theme }) => ({
 //   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
 //   ...theme.typography.body2,
@@ -21,9 +23,9 @@ import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 // }));
 
 const Item = styled(Button)(({ theme }) => ({
-  ...theme.typography.h5,
+  ...theme.typography.h6,
   // height: 40,
-  width: 150,
+  // width: 150,
   textAlign: 'center',
   color: theme.palette.text.secondary,
   lineHeight: 3,
@@ -65,47 +67,40 @@ export default function BasicGrid() {
     //   </CardActions>
     // </Card>
     <div>
-      <Box
-        sx={{
-          position: 'absolute',
-          top: 0,
-          bottom: 0,
-          right: 0,
-          left: 0,
-          backgroundColor: 'rgba(0,0,0,.3)',
-        }}
-      />
+      
       <Grid container>
-        <Grid item md={6}>
-          <Box
-            sx={{
-              position: 'relative',
-              p: { xs: 3, md: 6 },
-              pr: { md: 0 },
-            }}
-          >
-            <Typography component="h1" variant="h3" color="inherit" gutterBottom>
-              P2P decentralized To sell or buy crypto using fiat
-            </Typography>
-            <Typography variant="h5" color="inherit" paragraph>
-              BBuy Crypto with fiat 
-            </Typography>
-            <Typography variant="h5" color="inherit" paragraph>
-              Become a provider to sell your crypto. Choose your own payment method in fiat (cash, interac, ...)
-            </Typography>
-            <LinkMui variant="h5" href="#">
-              Docs
-            </LinkMui>
-          </Box>
-        </Grid>
+        <Paper>
+          <Grid item md={6}>
+            <Box
+              sx={{
+                position: 'relative',
+                p: { xs: 3, md: 6 },
+                pr: { md: 0 },
+              }}
+            >
+              <Typography component="h1" variant="h3" color="inherit" gutterBottom>
+                P2P decentralized To sell or buy crypto using fiat
+              </Typography>
+              <Typography variant="h5" color="inherit" paragraph>
+                BBuy Crypto with fiat 
+              </Typography>
+              <Typography variant="h5" color="inherit" paragraph>
+                Become a provider to sell your crypto. Choose your own payment method in fiat (cash, interac, ...)
+              </Typography>
+              <LinkMui variant="h5" href="#">
+                Docs
+              </LinkMui>
+            </Box>
+          </Grid>
+        </Paper>
       </Grid>
-      <Grid sx={{ flexGrow: 1 }} container m={2} spacing={2}>
+      <Grid sx={{ flexGrow: 1 }} container spacing={2}>
         <Grid item xs={12}>
           <Grid container justifyContent="center" spacing={3}>
             {["buy crypto with fiat", "Sell crypto for fiat"].map((value) => (
-              <Grid key={value} m={4} item >
+              <Grid key={value} m={2} item >
                 <Link to={'/signup'} key={value} >
-                  <Item >{value}</Item>
+                  <Button variant='contained'>{value}</Button>
                 </Link>
               </Grid>
             ))}
