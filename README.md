@@ -9,6 +9,7 @@ Once the webpage has loaded, changes made to files inside the `src/` directory (
 # Pages
 The pages are not using the WAGMI components. I am just testing them.
 The plan at the moment is to use Ether.js.(To be done)
+
   #Home
   ![image](https://github.com/ozi3ozi/P2Pex-Frontend/assets/56284896/da1f9479-2a5f-4d31-bf36-58722c769c45)
   ![image](https://github.com/ozi3ozi/P2Pex-Frontend/assets/56284896/16e0a267-e2c6-4ec9-9dc5-9657965126fa)
