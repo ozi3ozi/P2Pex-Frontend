@@ -11,7 +11,8 @@ import { WagmiConfig } from 'wagmi'
 import { App } from './App'
 import { config } from './wagmi'
 import SignUp from './components/pages/CreateProvider'
-import BasicGrid from './components/pages/LandingPage'
+import LandingPage from './components/pages/LandingPage'
+import BuyCryptoPage from './components/pages/BuyCryptoPage'
 
 const router = createBrowserRouter(
   createRoutesFromElements(
@@ -19,11 +20,9 @@ const router = createBrowserRouter(
       path='/'
       element={<App />}
       >
-        <Route index element={<BasicGrid />} />
-        <Route
-          path='signup'
-          element={<SignUp />}
-          />
+        <Route index element={<LandingPage />} />
+        <Route path='signup' element={<SignUp />} />
+        <Route path='buy-crypto' element={<BuyCryptoPage />} />
     </Route>
   ));
 

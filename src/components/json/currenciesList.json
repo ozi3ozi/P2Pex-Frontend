@@ -1,0 +1,54 @@
+{
+    "fiatList": {
+        "USD": {
+            "code": "USD",
+            "icon" : "🇺🇸"
+        },
+        "JPY": {
+            "code": "JPY",
+            "icon" : "🇯🇵"
+        },
+        "AUD": {
+            "code": "AUD",
+            "icon" : "🇦🇺"
+        },
+        "CHF": {
+            "code": "CHF",
+            "icon" : "🇨🇭"
+        },
+        "SGD": {
+            "code": "SGD",
+            "icon" : "🇸🇬"
+        },
+        "MXN": {
+            "code": "MXN",
+            "icon" : "🇲🇽"
+        },
+        "BRL": {
+            "code": "BRL",
+            "icon" : "🇧🇷"
+        },
+        "GBP": {
+            "code": "GBP",
+            "icon" : "🇬🇧"
+        }
+    },
+    "cryptoList": {
+        "BTC": {
+            "code": "BTC",
+            "icon" : "🏴"
+        },
+        "ETH": {
+            "code": "ETH",
+            "icon" : "🌴"
+        },
+        "LINK": {
+            "code": "LINK",
+            "icon" : "🔗"
+        },
+        "ADA": {
+            "code": "ADA",
+            "icon" : "🦺"
+        }
+    }
+}

@@ -13,6 +13,8 @@ import { Button, CardActionArea, CardActions, Link as LinkMui } from '@mui/mater
 import { createTheme, ThemeProvider, styled } from '@mui/material/styles';
 
 import BgImage from "../../Images/pexels-adrien-olichon-2387793.jpg";
+import {CurrencyExchangeBox} from '../SwapBox'
+import WhyP2PexText from '../WhyP2PexText';
 
 // const Item = styled(Paper)(({ theme }) => ({
 //   backgroundColor: theme.palette.mode === 'dark' ? '#1A2027' : '#fff',
@@ -31,15 +33,8 @@ const Item = styled(Button)(({ theme }) => ({
   lineHeight: 3,
 }));
 
-const darkTheme = createTheme({ palette: { mode: 'dark' } });
-const lightTheme = createTheme({ palette: { mode: 'light' } });
 
-const handleOnClick = () => {
-  
-};
-
-export default function BasicGrid() {
-  const [theme, setTheme] = React.useState(darkTheme);
+export default function LandingPage() {
 
   return (
     // <Card sx={{ maxWidth: 345 }}>
@@ -68,7 +63,7 @@ export default function BasicGrid() {
     // </Card>
     <div>
       
-      <Grid container>
+      <Grid container spacing={2}>
         <Paper>
           <Grid item md={6}>
             <Box
@@ -93,14 +88,19 @@ export default function BasicGrid() {
             </Box>
           </Grid>
         </Paper>
+
+        <Grid item md={4}>
+              <WhyP2PexText />
+              <CurrencyExchangeBox filter={[]} selectedCrypto='' selectedFiat='' />
+          </Grid>
       </Grid>
       <Grid sx={{ flexGrow: 1 }} container spacing={2}>
         <Grid item xs={12}>
           <Grid container justifyContent="center" spacing={3}>
-            {["buy crypto with fiat", "Sell crypto for fiat"].map((value) => (
-              <Grid key={value} m={2} item >
-                <Link to={'/signup'} key={value} >
-                  <Button variant='contained'>{value}</Button>
+            {[{value:"buy crypto with fiat", link: '/buy-crypto'}, {value:"Sell crypto for fiat", link: '/signup'}].map((btn) => (
+              <Grid key={btn.value} m={2} item >
+                <Link to={btn.link} key={btn.value} >
+                  <Button variant='contained' size='large'>{btn.value}</Button>
                 </Link>
               </Grid>
             ))}

@@ -77,7 +77,7 @@ export function ConnectDialog() {
 
   return (
     <div>
-      <Button sx={{ my: 2, color: 'white', display: 'block' }}
+      <Button sx={{ my: 2, display: 'block' }}
               key={isConnected ? 'Disconnect' : 'Connect'}
               disableElevation onClick={isConnected ? () => disconnect() : handleClickOpen}>
         {isConnected ? 'Disconnect' : 'Connect'}

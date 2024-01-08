@@ -12,7 +12,7 @@ import { BlockNumber } from './components/BlockNumber'
 import { Connect } from './components/Connect'
 import { ConnectDialog } from './components/ConnectDialog'
 import ResponsiveAppBar from './components/pages/AppBar'
-import BasicGrid from './components/pages/LandingPage'
+import LandingPage from './components/pages/LandingPage'
 import { NetworkSwitcher } from './components/NetworkSwitcher'
 import { ReadContract } from './components/ReadContract'
 import { ReadContracts } from './components/ReadContracts'
@@ -39,6 +39,39 @@ import type { Engine, ISourceOptions } from "tsparticles-engine";
 import particlesOptions from "./particles.json";
 
 
+const getDesignTokens = (mode: PaletteMode) => ({
+  palette: {
+    mode,
+    ...(mode === 'light'
+      ? {
+          // palette values for light mode
+          primary: {
+            main: '#1b0c0d',
+          },
+          secondary: {
+            main: '#f50057',
+          },
+          background: {
+            default: '#dcd2ca',
+            paper: '#f2ede9',
+          },
+        }
+      : {
+          // palette values for dark mode
+          primary: {
+            main: '#FFE0B2',
+          },
+          secondary: {
+            main: '#f50057',
+          },
+          background: {
+            default: '#1b0c0d',
+            paper: '#1b0c0d',
+          },
+        }),
+  },
+});
+
 const ColorModeContext = React.createContext({ toggleColorMode: () => {} });
 
 export function useColorModeContext() {
@@ -52,39 +85,6 @@ export function App() {
   const particlesInit = useCallback(async (engine: Engine) => {
       await loadFull(engine);
   }, []);
-
-  const getDesignTokens = (mode: PaletteMode) => ({
-    palette: {
-      mode,
-      ...(mode === 'light'
-        ? {
-            // palette values for light mode
-            primary: {
-              main: '#1b0c0d',
-            },
-            secondary: {
-              main: '#f50057',
-            },
-            background: {
-              default: '#dcd2ca',
-              paper: '#f2ede9',
-            },
-          }
-        : {
-            // palette values for dark mode
-            primary: {
-              main: '#FFE0B2',
-            },
-            secondary: {
-              main: '#f50057',
-            },
-            background: {
-              default: '#1b0c0d',
-              paper: '#1b0c0d',
-            },
-          }),
-    },
-  });
 
   const [mode, setMode] = React.useState<PaletteMode>(preferredMode);
   const colorMode = React.useMemo(
